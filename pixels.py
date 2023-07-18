@@ -10,6 +10,7 @@ guides = []
 
 for guide in soup.select('div.guide-tile'):
     title = guide.select_one('p.guide-tile__title a')['href']
+    text = guide.select_one('p.guide-tile__title').text
     author = guide.select_one('span.guide-tile__author a').text
     views = guide.select_one('span.views').text
     timestamp = guide.select_one('span.guide-tile__timestamp').text
@@ -17,6 +18,7 @@ for guide in soup.select('div.guide-tile'):
     guide_data = {
         'title': title,
         'author': author,
+        'text': text,
         'views': views,
         'timestamp': timestamp
     }
@@ -26,4 +28,4 @@ for guide in soup.select('div.guide-tile'):
 
 
 for guide in guides:
-    print(f'Vídeo: https://tracker.gg{guide.get("title")}/')
+    print(f'Vídeo: https://tracker.gg{guide.get("title")} | Title: {guide.get("text")}')
